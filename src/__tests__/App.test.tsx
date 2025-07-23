@@ -6,7 +6,7 @@ describe('App', () => {
   it('renders the dashboard by default', () => {
     render(<App />)
     
-    expect(screen.getByText('The Test Dashboard')).toBeInTheDocument()
+    expect(screen.getByText('Test Dashboard')).toBeInTheDocument()
     expect(screen.getByText('Dashboard Overview')).toBeInTheDocument()
   })
 
@@ -28,6 +28,6 @@ describe('App', () => {
     render(<App />)
     
     const dashboardButton = screen.getByText('Dashboard').closest('button')
-    expect(dashboardButton).toHaveClass('bg-blue-100', 'text-blue-700')
+    expect(dashboardButton).toHaveClass('bg-white/10', 'text-white')
   })
 })
