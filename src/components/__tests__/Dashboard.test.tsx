@@ -1,109 +1,153 @@
-import { render, screen } from '@testing-library/react'
-import { describe, it, expect } from 'vitest'
-import Dashboard from '../Dashboard'
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import Dashboard, { type CardProps } from "../Dashboard";
+import { Users } from "lucide-react";
 
-describe('Dashboard', () => {
-  it('renders dashboard title and description', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('Dashboard Overview')).toBeInTheDocument()
-    expect(screen.getByText("Welcome back! Here's what's happening with your business today.")).toBeInTheDocument()
-  })
+describe("Dashboard", () => {
+  describe("cards", () => {
+    it("should render the cards when sent via props", () => {
+      const CARDS: CardProps[] = [
+        {
+          title: "title1",
+          value: "value1",
+          change: "change1",
+          icon: Users,
+          changeType: "positive",
+          color: "green",
+        },
+        {
+          title: "title2",
+          value: "value2",
+          change: "change2",
+          icon: Users,
+          changeType: "positive",
+          color: "green",
+        },
+      ];
 
-  it('renders all stat cards with titles', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('Total Users')).toBeInTheDocument()
-    expect(screen.getByText('Orders')).toBeInTheDocument()
-    expect(screen.getByText('Revenue')).toBeInTheDocument()
-    expect(screen.getByText('Growth')).toBeInTheDocument()
-  })
+      render(<Dashboard cards={CARDS} />);
 
-  it('renders card values correctly', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('1,234')).toBeInTheDocument()
-    expect(screen.getByText('567')).toBeInTheDocument()
-    expect(screen.getByText('$12,345')).toBeInTheDocument()
-    expect(screen.getByText('23%')).toBeInTheDocument()
-  })
+      expect(screen.getByText("title1")).toBeInTheDocument();
+      expect(screen.getByText("title2")).toBeInTheDocument();
 
-  it('renders change percentages for all cards', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('+12%')).toBeInTheDocument()
-    expect(screen.getByText('+8%')).toBeInTheDocument()
-    expect(screen.getByText('+15%')).toBeInTheDocument()
-    expect(screen.getByText('-2%')).toBeInTheDocument()
-  })
+      expect(screen.queryByText("Total Users")).not.toBeInTheDocument();
+      expect(screen.queryByText("Orders")).not.toBeInTheDocument();
+      expect(screen.queryByText("Revenue")).not.toBeInTheDocument();
+      expect(screen.queryByText("Growth")).not.toBeInTheDocument();
+    });
+  });
 
-  it('renders recent activity section with items', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('Recent Activity')).toBeInTheDocument()
-    expect(screen.getByText('New user registered')).toBeInTheDocument()
-    expect(screen.getByText('Order #1234 completed')).toBeInTheDocument()
-    expect(screen.getByText('Payment received')).toBeInTheDocument()
-  })
+  it("renders dashboard title and description", () => {
+    render(<Dashboard />);
 
-  it('renders activity timestamps', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('2 min ago')).toBeInTheDocument()
-    expect(screen.getByText('5 min ago')).toBeInTheDocument()
-    expect(screen.getByText('10 min ago')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Dashboard Overview")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Welcome back! Here's what's happening with your business today."
+      )
+    ).toBeInTheDocument();
+  });
 
-  it('renders quick stats section with all metrics', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('Quick Stats')).toBeInTheDocument()
-    expect(screen.getByText('Active Sessions')).toBeInTheDocument()
-    expect(screen.getByText('Page Views')).toBeInTheDocument()
-    expect(screen.getByText('Bounce Rate')).toBeInTheDocument()
-  })
+  it("renders all stat cards with titles", () => {
+    render(<Dashboard />);
 
-  it('renders quick stats values', () => {
-    render(<Dashboard />)
-    
-    expect(screen.getByText('145')).toBeInTheDocument()
-    expect(screen.getByText('2,453')).toBeInTheDocument()
-    expect(screen.getByText('34%')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Total Users")).toBeInTheDocument();
+    expect(screen.getByText("Orders")).toBeInTheDocument();
+    expect(screen.getByText("Revenue")).toBeInTheDocument();
+    expect(screen.getByText("Growth")).toBeInTheDocument();
+  });
 
-  it('uses proper semantic structure', () => {
-    render(<Dashboard />)
-    
+  it("renders card values correctly", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("1,234")).toBeInTheDocument();
+    expect(screen.getByText("567")).toBeInTheDocument();
+    expect(screen.getByText("$12,345")).toBeInTheDocument();
+    expect(screen.getByText("23%")).toBeInTheDocument();
+  });
+
+  it("renders change percentages for all cards", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("+12%")).toBeInTheDocument();
+    expect(screen.getByText("+8%")).toBeInTheDocument();
+    expect(screen.getByText("+15%")).toBeInTheDocument();
+    expect(screen.getByText("-2%")).toBeInTheDocument();
+  });
+
+  it("renders recent activity section with items", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("Recent Activity")).toBeInTheDocument();
+    expect(screen.getByText("New user registered")).toBeInTheDocument();
+    expect(screen.getByText("Order #1234 completed")).toBeInTheDocument();
+    expect(screen.getByText("Payment received")).toBeInTheDocument();
+  });
+
+  it("renders activity timestamps", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("2 min ago")).toBeInTheDocument();
+    expect(screen.getByText("5 min ago")).toBeInTheDocument();
+    expect(screen.getByText("10 min ago")).toBeInTheDocument();
+  });
+
+  it("renders quick stats section with all metrics", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("Quick Stats")).toBeInTheDocument();
+    expect(screen.getByText("Active Sessions")).toBeInTheDocument();
+    expect(screen.getByText("Page Views")).toBeInTheDocument();
+    expect(screen.getByText("Bounce Rate")).toBeInTheDocument();
+  });
+
+  it("renders quick stats values", () => {
+    render(<Dashboard />);
+
+    expect(screen.getByText("145")).toBeInTheDocument();
+    expect(screen.getByText("2,453")).toBeInTheDocument();
+    expect(screen.getByText("34%")).toBeInTheDocument();
+  });
+
+  it("uses proper semantic structure", () => {
+    render(<Dashboard />);
+
     // Check for main heading
-    const mainHeading = screen.getByRole('heading', { level: 1 })
-    expect(mainHeading).toHaveTextContent('Dashboard Overview')
-    
+    const mainHeading = screen.getByRole("heading", { level: 1 });
+    expect(mainHeading).toHaveTextContent("Dashboard Overview");
+
     // Check for section headings
-    const sectionHeadings = screen.getAllByRole('heading', { level: 2 })
-    expect(sectionHeadings).toHaveLength(2)
-  })
+    const sectionHeadings = screen.getAllByRole("heading", { level: 2 });
+    expect(sectionHeadings).toHaveLength(2);
+  });
 
-  it('renders with correct CSS classes for styling', () => {
-    render(<Dashboard />)
-    
-    const container = screen.getByText('Dashboard Overview').closest('div')
-    expect(container).toBeInTheDocument()
-  })
+  it("renders with correct CSS classes for styling", () => {
+    render(<Dashboard />);
 
-  it('renders icons for each stat card', () => {
-    const { container } = render(<Dashboard />)
-    
+    const container = screen.getByText("Dashboard Overview").closest("div");
+    expect(container).toBeInTheDocument();
+  });
+
+  it("renders icons for each stat card", () => {
+    const { container } = render(<Dashboard />);
+
     // Check that SVG icons are present (from Lucide React)
-    const svgElements = container.querySelectorAll('svg')
-    expect(svgElements.length).toBeGreaterThanOrEqual(4) // At least 4 icons for the cards
-  })
+    const svgElements = container.querySelectorAll("svg");
+    expect(svgElements.length).toBeGreaterThanOrEqual(4); // At least 4 icons for the cards
+  });
 
-  it('has accessible structure for screen readers', () => {
-    render(<Dashboard />)
-    
+  it("has accessible structure for screen readers", () => {
+    render(<Dashboard />);
+
     // Check that there are proper headings for screen readers
-    expect(screen.getByRole('heading', { name: 'Dashboard Overview' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Recent Activity' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Quick Stats' })).toBeInTheDocument()
-  })
-})
+    expect(
+      screen.getByRole("heading", { name: "Dashboard Overview" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Recent Activity" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Quick Stats" })
+    ).toBeInTheDocument();
+  });
+});
