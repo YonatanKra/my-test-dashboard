@@ -23,8 +23,8 @@ A modern React TypeScript dashboard application built with Vite, featuring a res
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn
+- Node.js (version 18.0.0 or higher)
+- npm (version 8.0.0 or higher)
 
 ### Installation
 
@@ -45,6 +45,33 @@ npm run dev
 ```
 
 4. Open your browser and navigate to `http://localhost:5173`
+
+## Troubleshooting
+
+### `TypeError: crypto.has is not a function`
+
+This error occurs when using an incompatible Node.js version. To fix:
+
+1. **Check your Node.js version**:
+   ```bash
+   node --version
+   ```
+
+2. **Upgrade to Node.js 18+**:
+   - Using nvm: `nvm install 18 && nvm use 18`
+   - Or download from [nodejs.org](https://nodejs.org/)
+
+3. **Clear npm cache and reinstall**:
+   ```bash
+   npm cache clean --force
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+4. **If using nvm, use the project's Node version**:
+   ```bash
+   nvm use
+   ```
 
 ## Available Scripts
 
