@@ -5,6 +5,33 @@ import { Users } from "lucide-react";
 
 describe("Dashboard", () => {
   describe("cards", () => {
+    it("should render all stat cards with default titles", () => {
+      render(<Dashboard />);
+
+      expect(screen.getByText("Total Users")).toBeInTheDocument();
+      expect(screen.getByText("Orders")).toBeInTheDocument();
+      expect(screen.getByText("Revenue")).toBeInTheDocument();
+      expect(screen.getByText("Growth")).toBeInTheDocument();
+    });
+
+    it("should render all stat cards with default values", () => {
+      render(<Dashboard />);
+
+      expect(screen.getByText("1,234")).toBeInTheDocument();
+      expect(screen.getByText("567")).toBeInTheDocument();
+      expect(screen.getByText("$12,345")).toBeInTheDocument();
+      expect(screen.getByText("23%")).toBeInTheDocument();
+    });
+
+    it("should render all stat cards with default change percentages", () => {
+      render(<Dashboard />);
+
+      expect(screen.getByText("+12%")).toBeInTheDocument();
+      expect(screen.getByText("+8%")).toBeInTheDocument();
+      expect(screen.getByText("+15%")).toBeInTheDocument();
+      expect(screen.getByText("-2%")).toBeInTheDocument();
+    });
+    
     it("should render the cards when sent via props", () => {
       const CARDS: CardProps[] = [
         {
@@ -46,33 +73,6 @@ describe("Dashboard", () => {
         "Welcome back! Here's what's happening with your business today."
       )
     ).toBeInTheDocument();
-  });
-
-  it("renders all stat cards with titles", () => {
-    render(<Dashboard />);
-
-    expect(screen.getByText("Total Users")).toBeInTheDocument();
-    expect(screen.getByText("Orders")).toBeInTheDocument();
-    expect(screen.getByText("Revenue")).toBeInTheDocument();
-    expect(screen.getByText("Growth")).toBeInTheDocument();
-  });
-
-  it("renders card values correctly", () => {
-    render(<Dashboard />);
-
-    expect(screen.getByText("1,234")).toBeInTheDocument();
-    expect(screen.getByText("567")).toBeInTheDocument();
-    expect(screen.getByText("$12,345")).toBeInTheDocument();
-    expect(screen.getByText("23%")).toBeInTheDocument();
-  });
-
-  it("renders change percentages for all cards", () => {
-    render(<Dashboard />);
-
-    expect(screen.getByText("+12%")).toBeInTheDocument();
-    expect(screen.getByText("+8%")).toBeInTheDocument();
-    expect(screen.getByText("+15%")).toBeInTheDocument();
-    expect(screen.getByText("-2%")).toBeInTheDocument();
   });
 
   it("renders recent activity section with items", () => {
